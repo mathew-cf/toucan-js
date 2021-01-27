@@ -15,7 +15,7 @@ import { v4 as uuidv4 } from "uuid";
 import { parse } from "cookie";
 import { fromError } from "stacktrace-js";
 
-export default class Toucan {
+export class Toucan {
   /**
    * If an empty DSN is passed, we should treat it as valid option which signifies disabling the SDK.
    */
@@ -80,7 +80,7 @@ export default class Toucan {
     }
 
     this.user = undefined;
-    this.request = this.toSentryRequest(options.event.request);
+    this.request = this.toSentryRequest(options.request);
     this.breadcrumbs = [];
     this.tags = undefined;
     this.extra = undefined;
@@ -190,7 +190,7 @@ export default class Toucan {
 
     if (!event) return;
 
-    this.options.event.waitUntil(this.reportException(event, exception));
+    this.options.waitUntil(this.reportException(event, exception));
 
     return event.event_id;
   }
@@ -209,7 +209,7 @@ export default class Toucan {
 
     if (!event) return;
 
-    this.options.event.waitUntil(this.reportMessage(event));
+    this.options.waitUntil(this.reportMessage(event));
 
     return event.event_id;
   }

@@ -11,7 +11,8 @@ export type RewriteFrames = {
 };
 
 export type Options = {
-  event: FetchEvent;
+  request: Request;
+  waitUntil: (promise: Promise<any>)=>void;
   dsn?: SentryOptions["dsn"];
   allowedCookies?: string[] | RegExp;
   allowedHeaders?: string[] | RegExp;
